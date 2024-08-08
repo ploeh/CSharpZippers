@@ -73,4 +73,14 @@ public sealed class ListZipperTests
         var actual = sut.GoForward()?.GoBack();
         Assert.Equal(["foo", "bar", "foo"], actual?.Take(3));
     }
+
+    [Fact]
+    public void InsertAtFocus()
+    {
+        var sut = new ListZipper<string>(["foo", "bar"], []);
+        var actual = sut.GoForward()?.Insert("ploeh").GoBack();
+        Assert.Equal(
+            new ListZipper<string>(["foo", "ploeh", "bar"], []),
+            actual);
+    }
 }

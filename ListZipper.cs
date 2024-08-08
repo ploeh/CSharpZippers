@@ -34,6 +34,11 @@ public sealed class ListZipper<T> : IEnumerable<T>
         return new ListZipper<T>(head.Concat(values), tail);
     }
 
+    public ListZipper<T> Insert(T value)
+    {
+        return new ListZipper<T>(values.Prepend(value), breadcrumbs);
+    }
+
     public override bool Equals(object? obj)
     {
         if (obj is ListZipper<T> other)
