@@ -6,9 +6,9 @@ internal class ListZipper<T>
     private T[] values;
     private T[] breadcrumbs;
 
-    public ListZipper(T[] ints1, T[] ints2)
+    public ListZipper(T[] values, T[] ints2)
     {
-        this.values = ints1;
+        this.values = values;
         this.breadcrumbs = ints2;
     }
 
