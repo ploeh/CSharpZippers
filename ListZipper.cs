@@ -19,7 +19,7 @@ public sealed class ListZipper<T>
         return new ListZipper<T>(tail, head.Concat(breadcrumbs));
     }
 
-    internal ListZipper<int> GoBack()
+    public ListZipper<int> GoBack()
     {
         return new ListZipper<int>([3, 4], [2, 1]);
     }
