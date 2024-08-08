@@ -6,10 +6,10 @@ internal class ListZipper<T>
     private T[] values;
     private T[] breadcrumbs;
 
-    public ListZipper(T[] values, T[] ints2)
+    public ListZipper(T[] values, T[] breadcrumbs)
     {
         this.values = values;
-        this.breadcrumbs = ints2;
+        this.breadcrumbs = breadcrumbs;
     }
 
     internal ListZipper<int> GoForward()
