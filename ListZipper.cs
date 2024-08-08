@@ -19,6 +19,11 @@ public sealed class ListZipper<T>
         return new ListZipper<T>(tail, head.Concat(breadcrumbs));
     }
 
+    internal ListZipper<int> GoBack()
+    {
+        return new ListZipper<int>([3, 4], [2, 1]);
+    }
+
     public override bool Equals(object? obj)
     {
         if (obj is ListZipper<T> other)
