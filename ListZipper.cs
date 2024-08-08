@@ -4,9 +4,9 @@ namespace Ploeh.Samples.Zippers;
 internal class ListZipper<T>
 {
     private T[] values;
-    private int[] breadcrumbs;
+    private T[] breadcrumbs;
 
-    public ListZipper(T[] ints1, int[] ints2)
+    public ListZipper(T[] ints1, T[] ints2)
     {
         this.values = ints1;
         this.breadcrumbs = ints2;
