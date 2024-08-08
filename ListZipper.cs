@@ -6,7 +6,7 @@ internal class ListZipper<T>
     private readonly IEnumerable<T> values;
     private readonly IEnumerable<T> breadcrumbs;
 
-    public ListZipper(IEnumerable<T> values, T[] breadcrumbs)
+    public ListZipper(IEnumerable<T> values, IEnumerable<T> breadcrumbs)
     {
         this.values = values;
         this.breadcrumbs = breadcrumbs;
