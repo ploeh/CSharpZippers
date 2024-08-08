@@ -12,9 +12,12 @@ public sealed class ListZipper<T>
         this.breadcrumbs = breadcrumbs;
     }
 
-    public ListZipper<T> GoForward()
+    public ListZipper<T>? GoForward()
     {
         var head = values.Take(1);
+        if (!head.Any())
+            return null;
+
         var tail = values.Skip(1);
         return new ListZipper<T>(tail, head.Concat(breadcrumbs));
     }

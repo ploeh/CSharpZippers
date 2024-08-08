@@ -27,6 +27,14 @@ public sealed class ListZipperTests
     }
 
     [Fact]
+    public void GoForwardEmpty()
+    {
+        var sut = new ListZipper<string>([], ["foo", "bar", "baz"]);
+        var actual = sut.GoForward();
+        Assert.Null(actual);
+    }
+
+    [Fact]
     public void GoBack1()
     {
         var sut = new ListZipper<int>([4], [3, 2, 1]);
