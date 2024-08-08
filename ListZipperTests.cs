@@ -49,4 +49,12 @@ public sealed class ListZipperTests
         var actual = sut.GoBack();
         Assert.Equal(new ListZipper<int>([2, 3, 4], [1]), actual);
     }
+
+    [Fact]
+    public void GoBackEmptyOnBreadcrumbs()
+    {
+        var sut = new ListZipper<string>(["foo", "bar", "baz"], []);
+        var actual = sut.GoBack();
+        Assert.Null(actual);
+    }
 }

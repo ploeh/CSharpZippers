@@ -22,9 +22,12 @@ public sealed class ListZipper<T>
         return new ListZipper<T>(tail, head.Concat(breadcrumbs));
     }
 
-    public ListZipper<T> GoBack()
+    public ListZipper<T>? GoBack()
     {
         var head = breadcrumbs.Take(1);
+        if (!head.Any())
+            return null;
+
         var tail = breadcrumbs.Skip(1);
         return new ListZipper<T>(head.Concat(values), tail);
     }
