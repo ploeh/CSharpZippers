@@ -4,7 +4,7 @@ namespace Ploeh.Samples.Zippers;
 internal class ListZipper<T>
 {
     private IEnumerable<T> values;
-    private T[] breadcrumbs;
+    private IEnumerable<T> breadcrumbs;
 
     public ListZipper(T[] values, T[] breadcrumbs)
     {
