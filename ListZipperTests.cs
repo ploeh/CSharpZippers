@@ -17,4 +17,12 @@ public sealed class ListZipperTests
         var actual = sut.GoForward();
         Assert.Equal(new ListZipper<int>([3, 4], [2, 1]), actual);
     }
+
+    [Fact]
+    public void GoForward3()
+    {
+        var sut = new ListZipper<int>([3, 4], [2, 1]);
+        var actual = sut.GoForward();
+        Assert.Equal(new ListZipper<int>([4], [3, 2, 1]), actual);
+    }
 }
