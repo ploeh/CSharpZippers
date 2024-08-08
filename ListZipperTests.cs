@@ -88,7 +88,15 @@ public sealed class ListZipperTests
     public void RemoveAtFocus()
     {
         var sut = new ListZipper<string>(["foo", "bar", "baz"], []);
-        var actual = sut.GoForward()?.Remove().GoBack();
+        var actual = sut.GoForward()?.Remove()?.GoBack();
         Assert.Equal(new ListZipper<string>(["foo", "baz"], []), actual);
+    }
+
+    [Fact]
+    public void RemoveWhenEmpty()
+    {
+        var sut = new ListZipper<string>([], []);
+        var actual = sut.Remove();
+        Assert.Null(actual);
     }
 }

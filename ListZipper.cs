@@ -39,10 +39,12 @@ public sealed class ListZipper<T> : IEnumerable<T>
         return new ListZipper<T>(values.Prepend(value), breadcrumbs);
     }
 
-    public ListZipper<T> Remove()
+    public ListZipper<T>? Remove()
     {
-        var head = values.Skip(1);
-        return new ListZipper<T>(head, breadcrumbs);
+        if (!values.Any())
+            return null;
+
+        return new ListZipper<T>(values.Skip(1), breadcrumbs);
     }
 
     public override bool Equals(object? obj)
