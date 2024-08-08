@@ -52,9 +52,7 @@ public sealed class ListZipper<T> : IEnumerable<T>
         if (!values.Any())
             return null;
 
-        return new ListZipper<T>(
-            new[] { newValue }.Concat(values.Skip(1)),
-            breadcrumbs);
+        return new ListZipper<T>(values.Skip(1).Prepend(newValue), breadcrumbs);
     }
 
     public override bool Equals(object? obj)
