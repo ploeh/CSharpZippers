@@ -12,9 +12,11 @@ internal class ListZipper<T>
         this.breadcrumbs = breadcrumbs;
     }
 
-    internal ListZipper<int> GoForward()
+    internal ListZipper<T> GoForward()
     {
-        return new ListZipper<int>(new int[] { 2, 3, 4 }, new int[] { 1 });
+        var head = values.Take(1);
+        var tail = values.Skip(1);
+        return new ListZipper<T>(tail, head.Concat(breadcrumbs));
     }
 
     public override bool Equals(object? obj)
