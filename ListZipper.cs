@@ -3,13 +3,13 @@ namespace Ploeh.Samples.Zippers;
 
 internal class ListZipper<T>
 {
-    private int[] ints1;
-    private int[] ints2;
+    private int[] values;
+    private int[] breadcrumbs;
 
     public ListZipper(int[] ints1, int[] ints2)
     {
-        this.ints1 = ints1;
-        this.ints2 = ints2;
+        this.values = ints1;
+        this.breadcrumbs = ints2;
     }
 
     internal ListZipper<int> GoForward()
@@ -20,19 +20,19 @@ internal class ListZipper<T>
     public override bool Equals(object? obj)
     {
         if (obj is ListZipper<T> other)
-            return ints1.SequenceEqual(other.ints1)
-                && ints2.SequenceEqual(other.ints2);
+            return values.SequenceEqual(other.values)
+                && breadcrumbs.SequenceEqual(other.breadcrumbs);
 
         return base.Equals(obj);
     }
 
     public override string ToString()
     {
-        return $"LZ ([{string.Join(", ", ints1)}], [{string.Join(", ", ints2)})]";
+        return $"LZ ([{string.Join(", ", values)}], [{string.Join(", ", breadcrumbs)})]";
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(ints1, ints2);
+        return HashCode.Combine(values, breadcrumbs);
     }
 }
