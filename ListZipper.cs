@@ -47,9 +47,14 @@ public sealed class ListZipper<T> : IEnumerable<T>
         return new ListZipper<T>(values.Skip(1), breadcrumbs);
     }
 
-    public ListZipper<T> Replace(T newValue)
+    public ListZipper<T>? Replace(T newValue)
     {
-        return new ListZipper<T>(new[] { newValue }.Concat(values.Skip(1)), breadcrumbs);
+        if (!values.Any())
+            return null;
+
+        return new ListZipper<T>(
+            new[] { newValue }.Concat(values.Skip(1)),
+            breadcrumbs);
     }
 
     public override bool Equals(object? obj)
