@@ -1,7 +1,9 @@
 ﻿
+using System.Collections;
+
 namespace Ploeh.Samples.Zippers;
 
-public sealed class ListZipper<T>
+public sealed class ListZipper<T> : IEnumerable<T>
 {
     private readonly IEnumerable<T> values;
     private readonly IEnumerable<T> breadcrumbs;
@@ -49,5 +51,15 @@ public sealed class ListZipper<T>
     public override int GetHashCode()
     {
         return HashCode.Combine(values, breadcrumbs);
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        return values.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }

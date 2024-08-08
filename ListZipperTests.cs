@@ -57,4 +57,20 @@ public sealed class ListZipperTests
         var actual = sut.GoBack();
         Assert.Null(actual);
     }
+
+    [Fact]
+    public void GoForwardOnInfiniteSequence()
+    {
+        var sut = new ListZipper<string>(Generate.Cycle(["foo", "bar"]), []);
+        var actual = sut.GoForward();
+        Assert.Equal(["bar", "foo", "bar"], actual?.Take(3));
+    }
+
+    [Fact]
+    public void GoForwardAndBackOnInfiniteSequence()
+    {
+        var sut = new ListZipper<string>(Generate.Cycle(["foo", "bar"]), []);
+        var actual = sut.GoForward()?.GoBack();
+        Assert.Equal(["foo", "bar", "foo"], actual?.Take(3));
+    }
 }
