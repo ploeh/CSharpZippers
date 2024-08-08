@@ -83,4 +83,12 @@ public sealed class ListZipperTests
             new ListZipper<string>(["foo", "ploeh", "bar"], []),
             actual);
     }
+
+    [Fact]
+    public void RemoveAtFocus()
+    {
+        var sut = new ListZipper<string>(["foo", "bar", "baz"], []);
+        var actual = sut.GoForward()?.Remove().GoBack();
+        Assert.Equal(new ListZipper<string>(["foo", "baz"], []), actual);
+    }
 }
