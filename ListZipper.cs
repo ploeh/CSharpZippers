@@ -1,7 +1,7 @@
 ﻿
 namespace Ploeh.Samples.Zippers;
 
-internal class ListZipper<T>
+public sealed class ListZipper<T>
 {
     private readonly IEnumerable<T> values;
     private readonly IEnumerable<T> breadcrumbs;
@@ -12,7 +12,7 @@ internal class ListZipper<T>
         this.breadcrumbs = breadcrumbs;
     }
 
-    internal ListZipper<T> GoForward()
+    public ListZipper<T> GoForward()
     {
         var head = values.Take(1);
         var tail = values.Skip(1);
