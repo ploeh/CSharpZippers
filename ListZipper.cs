@@ -30,4 +30,9 @@ internal class ListZipper<T>
     {
         return $"LZ ([{string.Join(", ", ints1)}], [{string.Join(", ", ints2)})]";
     }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(ints1, ints2);
+    }
 }
