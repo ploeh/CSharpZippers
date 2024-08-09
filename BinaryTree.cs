@@ -18,7 +18,7 @@ public sealed class BinaryTree<T>
     {
     }
 
-    TResult Aggregate<TResult>(
+    public TResult Aggregate<TResult>(
         Func<TResult> whenEmpty,
         Func<T, TResult, TResult, TResult> whenNode)
     {
@@ -34,7 +34,7 @@ public sealed class BinaryTree<T>
 
     private sealed class Empty : IBinaryTree
     {
-        public readonly static Empty Instance = new Empty();
+        public readonly static Empty Instance = new();
 
         private Empty()
         {
