@@ -5,10 +5,10 @@ public sealed class BinaryTreeTests
     [Fact]
     public void InOrderTraversalExample()
     {
-       var sut = new BinaryTree<int>(
+        BinaryTree<int> sut = new(
             42,
-            new BinaryTree<int>(1337, new BinaryTree<int>(), new BinaryTree<int>()),
-            new BinaryTree<int>(2112, new BinaryTree<int>(), new BinaryTree<int>()));
+            new(1337, new(), new()),
+            new(2112, new(), new()));
         var actual = sut.Aggregate(
             whenEmpty: Array.Empty<int>,
             whenNode: (value, left, right) => [.. left, value, .. right]);
@@ -19,10 +19,10 @@ public sealed class BinaryTreeTests
     [Fact]
     public void UseMatchToDetectEmptyLeft()
     {
-        var sut = new BinaryTree<int>(
+        BinaryTree<int> sut = new(
             42,
-            new BinaryTree<int>(),
-            new BinaryTree<int>(2, new BinaryTree<int>(), new BinaryTree<int>()));
+            new(),
+            new(2, new(), new()));
         var actual = sut.Match(
             whenEmpty: () => false,
             whenNode: (_, l, _) => l.Match(() => true, (_, _, _) => false));
