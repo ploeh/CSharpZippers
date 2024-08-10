@@ -164,4 +164,37 @@ public sealed class BinaryTreeZipperTests
                 ]),
             actual);
     }
+
+    [Fact]
+    public void AttachAndGoTopMost()
+    {
+        var sut = new BinaryTreeZipper<char>(freeTree, []);
+
+        // Same scenario as AttachExample, but with TopMost at the end.
+        var farLeft = sut.GoLeft()?.GoLeft()?.GoLeft()?.GoLeft();
+        var actual = farLeft?.Attach(new('Z', new(), new())).TopMost();
+
+        Assert.NotNull(actual);
+        Assert.Equal(
+            new BinaryTreeZipper<char>(
+                new('P',
+                    new('O',
+                        new('L',
+                            new('N',
+                                new('Z', new(), new()),
+                                new()),
+                            new('T', new(), new())),
+                        new('Y',
+                            new('S', new(), new()),
+                            new('A', new(), new()))),
+                    new('L',
+                        new('W',
+                            new('C', new(), new()),
+                            new('R', new(), new())),
+                        new('A',
+                            new('A', new(), new()),
+                            new('C', new(), new())))),
+                []),
+            actual);
+    }
 }

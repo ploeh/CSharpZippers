@@ -47,6 +47,11 @@ public sealed class BinaryTreeZipper<T>
                 tail));
     }
 
+    public BinaryTreeZipper<T> TopMost()
+    {
+        return GoUp()?.TopMost() ?? this;
+    }
+
     public BinaryTreeZipper<T> Modify(Func<T, T> f)
     {
         return new BinaryTreeZipper<T>(
