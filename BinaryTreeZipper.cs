@@ -31,6 +31,22 @@ public sealed class BinaryTreeZipper<T>
                 Breadcrumbs.Prepend(Crumb.Right(x, l))));
     }
 
+    public BinaryTreeZipper<T>? GoUp()
+    {
+        if (!Breadcrumbs.Any())
+            return null;
+        var head = Breadcrumbs.First();
+
+        var tail = Breadcrumbs.Skip(1);
+        return head.Match(
+            whenLeft: (x, r) => new BinaryTreeZipper<T>(
+                new BinaryTree<T>(x, Tree, r),
+                tail),
+            whenRight: (x, l) => new BinaryTreeZipper<T>(
+                new BinaryTree<T>(x, l, Tree),
+                tail));
+    }
+
     public BinaryTreeZipper<T> Modify(Func<T, T> f)
     {
         return new BinaryTreeZipper<T>(

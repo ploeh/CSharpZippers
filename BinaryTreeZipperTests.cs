@@ -99,4 +99,37 @@ public sealed class BinaryTreeZipperTests
                 ]),
             actual);
     }
+
+    // Reprodces the example from
+    // https://learnyouahaskell.com/zippers
+    [Fact]
+    public void ExtendedArticleExample()
+    {
+        var sut = new BinaryTreeZipper<char>(freeTree, []);
+
+        var actual =
+            sut.GoLeft()?.GoRight()?.Modify(_ => 'P').GoUp()?.Modify(_ => 'X');
+
+        Assert.NotNull(actual);
+        Assert.Equal(
+            new BinaryTreeZipper<char>(
+                new('X',
+                    new('L',
+                            new('N', new(), new()),
+                            new('T', new(), new())),
+                    new('P',
+                            new('S', new(), new()),
+                            new('A', new(), new()))),
+                [   Crumb.Left(
+                        'P',
+                        new('L',
+                            new('W',
+                                new('C', new(), new()),
+                                new('R', new(), new())),
+                            new('A',
+                                new('A', new(), new()),
+                                new('C', new(), new()))))
+                ]),
+            actual);
+    }
 }
