@@ -56,6 +56,11 @@ public sealed class BinaryTreeZipper<T>
             Breadcrumbs);
     }
 
+    public BinaryTreeZipper<T> Attach(BinaryTree<T> tree)
+    {
+        return new BinaryTreeZipper<T>(tree, Breadcrumbs);
+    }
+
     public override bool Equals(object? obj)
     {
         if (obj is BinaryTreeZipper<T> other)

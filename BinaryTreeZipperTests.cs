@@ -132,4 +132,36 @@ public sealed class BinaryTreeZipperTests
                 ]),
             actual);
     }
+
+    [Fact]
+    public void AttachExample()
+    {
+        var sut = new BinaryTreeZipper<char>(freeTree, []);
+
+        var farLeft = sut.GoLeft()?.GoLeft()?.GoLeft()?.GoLeft();
+        var actual = farLeft?.Attach(new('Z', new(), new()));
+
+        Assert.NotNull(actual);
+        Assert.Equal(
+            new BinaryTreeZipper<char>(
+                new('Z', new(), new()),
+                [   Crumb.Left('N', new()),
+                    Crumb.Left('L', new('T', new(), new())),
+                    Crumb.Left(
+                        'O',
+                        new('Y',
+                            new('S', new(), new()),
+                            new('A', new(), new()))),
+                    Crumb.Left(
+                        'P',
+                        new('L',
+                            new('W',
+                                new('C', new(), new()),
+                                new('R', new(), new())),
+                            new('A',
+                                new('A', new(), new()),
+                                new('C', new(), new()))))
+                ]),
+            actual);
+    }
 }
