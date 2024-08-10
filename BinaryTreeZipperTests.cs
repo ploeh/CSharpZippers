@@ -68,4 +68,35 @@ public sealed class BinaryTreeZipperTests
                     new('S', new(), new()),
                     new('A', new(), new()))))]), actual);
     }
+
+    [Fact]
+    public void ReplaceYWithP()
+    {
+        var sut = new BinaryTreeZipper<char>(freeTree, []);
+
+        var actual = sut.GoLeft()?.GoRight()?.Modify(_ => 'P');
+
+        Assert.NotNull(actual);
+        Assert.Equal(
+            new BinaryTreeZipper<char>(
+                new('P',
+                    new('S', new(), new()),
+                    new('A', new(), new())),
+                [   Crumb.Right(
+                        'O',
+                        new('L',
+                            new('N', new(), new()),
+                            new('T', new(), new()))),
+                    Crumb.Left(
+                        'P',
+                        new('L',
+                            new('W',
+                                new('C', new(), new()),
+                                new('R', new(), new())),
+                            new('A',
+                                new('A', new(), new()),
+                                new('C', new(), new()))))
+                ]),
+            actual);
+    }
 }

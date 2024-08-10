@@ -31,6 +31,15 @@ public sealed class BinaryTreeZipper<T>
                 Breadcrumbs.Prepend(Crumb.Right(x, l))));
     }
 
+    public BinaryTreeZipper<T> Modify(Func<T, T> f)
+    {
+        return new BinaryTreeZipper<T>(
+            Tree.Match(
+                whenEmpty: () => new BinaryTree<T>(),
+                whenNode: (x, l, r) => new BinaryTree<T>(f(x), l, r)),
+            Breadcrumbs);
+    }
+
     public override bool Equals(object? obj)
     {
         if (obj is BinaryTreeZipper<T> other)
