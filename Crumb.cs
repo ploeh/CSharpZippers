@@ -52,6 +52,17 @@ public sealed class Crumb<T>
             return whenRight(Value, Left);
         }
     }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is Crumb<T> crumb &&
+               EqualityComparer<ICrumb>.Default.Equals(imp, crumb.imp);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(imp);
+    }
 }
 
 public static class Crumb
