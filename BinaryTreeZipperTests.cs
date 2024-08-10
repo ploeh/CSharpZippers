@@ -43,4 +43,29 @@ public sealed class BinaryTreeZipperTests
                     new('A', new(), new()),
                     new('C', new(), new()))))]), actual);
     }
+
+    [Fact]
+    public void GoRightOnFreeTree()
+    {
+        var sut = new BinaryTreeZipper<char>(freeTree, []);
+
+        var actual = sut.GoRight();
+
+        Assert.NotNull(actual);
+        Assert.Equal(new BinaryTreeZipper<char>(
+            new('L',
+                new('W',
+                    new('C', new(), new()),
+                    new('R', new(), new())),
+                new('A',
+                    new('A', new(), new()),
+                    new('C', new(), new()))),
+            [Crumb.Right('P', new('O',
+                new('L',
+                    new('N', new(), new()),
+                    new('T', new(), new())),
+                new('Y',
+                    new('S', new(), new()),
+                    new('A', new(), new()))))]), actual);
+    }
 }
