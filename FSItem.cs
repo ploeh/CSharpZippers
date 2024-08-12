@@ -32,12 +32,16 @@ public sealed class FSItem
         Func<string, string, TResult> whenFile,
         Func<string, IReadOnlyCollection<FSItem>, TResult> whenFolder)
     {
-        var foo = imp.Aggregate(
-            (name, data) => (FSItem.CreateFile(name, data), whenFile(name, data)),
-            (name, items) => (
-                FSItem.CreateFolder(name, items.Select(i => i.Item1).ToList()),
-                whenFolder(name, items.Select(i => i.Item1).ToList())));
-        return foo.Item2;
+        return imp
+            .Aggregate(
+                whenFile: (name, data) =>
+                    (item: CreateFile(name, data), result: whenFile(name, data)),
+                whenFolder: (name, pairs) =>
+                {
+                    var items = pairs.Select(i => i.item).ToList();
+                    return (CreateFolder(name, items), whenFolder(name, items));
+                })
+            .result;
     }
 
     private interface IFSItem
