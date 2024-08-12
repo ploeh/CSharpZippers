@@ -1,5 +1,4 @@
-﻿
-namespace Ploeh.Samples.Zippers;
+﻿namespace Ploeh.Samples.Zippers;
 
 public sealed class FSZipper
 {
@@ -11,6 +10,19 @@ public sealed class FSZipper
 
     public FSItem FSItem { get; }
     public IReadOnlyCollection<FSCrumb> Breadcrumbs { get; }
+
+    public FSZipper? GoUp()
+    {
+        if (Breadcrumbs.Count == 0)
+            return null;
+
+        var head = Breadcrumbs.First();
+        var tail = Breadcrumbs.Skip(1);
+
+        return new FSZipper(
+            FSItem.CreateFolder(head.Name, [.. head.Left, FSItem, .. head.Right]),
+            tail.ToList());
+    }
 
     public override bool Equals(object? obj)
     {
