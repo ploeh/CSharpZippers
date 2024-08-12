@@ -26,7 +26,7 @@ public sealed class FSZipper
                 var rs = new List<FSItem>();
                 foreach (var i in items)
                 {
-                    if (item is null && i.Match((n, _) => n == name, (n, _) => n == name))
+                    if (item is null && i.IsNamed(name))
                         item = i;
                     else if (item is null)
                         ls.Add(i);
@@ -37,7 +37,9 @@ public sealed class FSZipper
                 if (item is null)
                     return null;
 
-                return new FSZipper(item, Breadcrumbs.Prepend(new FSCrumb(folderName, ls, rs)).ToList());
+                return new FSZipper(
+                    item,
+                    Breadcrumbs.Prepend(new FSCrumb(folderName, ls, rs)).ToList());
             });
     }
 

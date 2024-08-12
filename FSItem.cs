@@ -44,6 +44,11 @@ public sealed class FSItem
             .result;
     }
 
+    public bool IsNamed(string name)
+    {
+        return Match((n, _) => n == name, (n, _) => n == name);
+    }
+
     private interface IFSItem
     {
         TResult Aggregate<TResult>(
