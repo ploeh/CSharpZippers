@@ -39,4 +39,19 @@ public sealed class FSZipperTests
             FSItem.CreateFile("skull_man(scary).bmp", "Yikes!"),
             actual.FSItem);
     }
+
+    [Fact]
+    public void GoUpFromSkullMan()
+    {
+        var sut = new FSZipper(myDisk);
+        // This is the same as the GoToSkullMan test
+        var newFocus = sut.GoTo("pics")?.GoTo("skull_man(scary).bmp");
+
+        var actual = newFocus?.GoUp()?.GoTo("watermelon_smash.gif");
+
+        Assert.NotNull(actual);
+        Assert.Equal(
+            FSItem.CreateFile("watermelon_smash.gif", "smash!!"),
+            actual.FSItem);
+    }
 }
