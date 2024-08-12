@@ -65,6 +65,15 @@ public sealed class FSZipper
             Breadcrumbs);
     }
 
+    public FSZipper? Add(FSItem item)
+    {
+        return FSItem.Match<FSZipper?>(
+            whenFile: (_, _) => null,
+            whenFolder: (name, items) => new FSZipper(
+                FSItem.CreateFolder(name, items.Prepend(item).ToList()),
+                Breadcrumbs));
+    }
+
     public override bool Equals(object? obj)
     {
         return obj is FSZipper zipper &&
