@@ -1,17 +1,20 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 
 namespace Ploeh.Samples.Zippers;
 
 public sealed class ListZipper<T> : IEnumerable<T>
 {
     private readonly IEnumerable<T> values;
-    private readonly IEnumerable<T> breadcrumbs;
+    public IEnumerable<T> Breadcrumbs { get; }
 
-    public ListZipper(IEnumerable<T> values, IEnumerable<T> breadcrumbs)
+    private ListZipper(IEnumerable<T> values, IEnumerable<T> breadcrumbs)
     {
         this.values = values;
-        this.breadcrumbs = breadcrumbs;
+        Breadcrumbs = breadcrumbs;
+    }
+
+    public ListZipper(IEnumerable<T> values) : this(values, [])
+    {
     }
 
     public ListZipper<T>? GoForward()
@@ -21,22 +24,22 @@ public sealed class ListZipper<T> : IEnumerable<T>
             return null;
 
         var tail = values.Skip(1);
-        return new ListZipper<T>(tail, head.Concat(breadcrumbs));
+        return new ListZipper<T>(tail, head.Concat(Breadcrumbs));
     }
 
     public ListZipper<T>? GoBack()
     {
-        var head = breadcrumbs.Take(1);
+        var head = Breadcrumbs.Take(1);
         if (!head.Any())
             return null;
 
-        var tail = breadcrumbs.Skip(1);
+        var tail = Breadcrumbs.Skip(1);
         return new ListZipper<T>(head.Concat(values), tail);
     }
 
     public ListZipper<T> Insert(T value)
     {
-        return new ListZipper<T>(values.Prepend(value), breadcrumbs);
+        return new ListZipper<T>(values.Prepend(value), Breadcrumbs);
     }
 
     public ListZipper<T>? Remove()
@@ -44,7 +47,7 @@ public sealed class ListZipper<T> : IEnumerable<T>
         if (!values.Any())
             return null;
 
-        return new ListZipper<T>(values.Skip(1), breadcrumbs);
+        return new ListZipper<T>(values.Skip(1), Breadcrumbs);
     }
 
     public ListZipper<T>? Replace(T newValue)
@@ -56,19 +59,19 @@ public sealed class ListZipper<T> : IEnumerable<T>
     {
         if (obj is ListZipper<T> other)
             return values.SequenceEqual(other.values)
-                && breadcrumbs.SequenceEqual(other.breadcrumbs);
+                && Breadcrumbs.SequenceEqual(other.Breadcrumbs);
 
         return base.Equals(obj);
     }
 
     public override string ToString()
     {
-        return $"LZ ([{string.Join(", ", values)}], [{string.Join(", ", breadcrumbs)})]";
+        return $"LZ ([{string.Join(", ", values)}], [{string.Join(", ", Breadcrumbs)})]";
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(values, breadcrumbs);
+        return HashCode.Combine(values, Breadcrumbs);
     }
 
     public IEnumerator<T> GetEnumerator()
