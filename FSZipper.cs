@@ -56,6 +56,15 @@ public sealed class FSZipper
             tail.ToList());
     }
 
+    public FSZipper Rename(string newName)
+    {
+        return new FSZipper(
+            FSItem.Match(
+                (_, dat) => FSItem.CreateFile(newName, dat),
+                (_, items) => FSItem.CreateFolder(newName, items)),
+            Breadcrumbs);
+    }
+
     public override bool Equals(object? obj)
     {
         return obj is FSZipper zipper &&
