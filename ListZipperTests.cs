@@ -122,6 +122,19 @@ public sealed class ListZipperTests
     }
 
     [Fact]
+    public void RemoveAtEnd()
+    {
+        var sut = new ListZipper<string>("foo", "bar").GoForward()?.GoForward();
+
+        var actual = sut?.Remove();
+
+        Assert.Null(actual);
+        Assert.NotNull(sut);
+        Assert.Empty(sut);
+        Assert.Equal(["bar", "foo"], sut.Breadcrumbs);
+    }
+
+    [Fact]
     public void ReplaceAtFocus()
     {
         var sut = new ListZipper<string>("foo", "bar", "baz");
