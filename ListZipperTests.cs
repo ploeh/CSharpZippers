@@ -5,7 +5,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoForward1()
     {
-        var sut = new ListZipper<int>([1, 2, 3, 4]);
+        var sut = new ListZipper<int>(1, 2, 3, 4);
 
         var actual = sut.GoForward();
 
@@ -16,7 +16,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoForward2()
     {
-        var sut = new ListZipper<int>([1, 2, 3, 4]);
+        var sut = new ListZipper<int>(1, 2, 3, 4);
 
         var actual = sut.GoForward()?.GoForward();
 
@@ -27,7 +27,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoForward3()
     {
-        var sut = new ListZipper<int>([1, 2, 3, 4]);
+        var sut = new ListZipper<int>(1, 2, 3, 4);
 
         var actual = sut.GoForward()?.GoForward()?.GoForward();
 
@@ -38,7 +38,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoForwardEmpty()
     {
-        var sut = new ListZipper<string>(["foo", "bar", "baz"]);
+        var sut = new ListZipper<string>("foo", "bar", "baz");
         var actual = sut.GoForward()?.GoForward()?.GoForward()?.GoForward();
         Assert.Null(actual);
     }
@@ -46,7 +46,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoBack1()
     {
-        var sut = new ListZipper<int>([1, 2, 3, 4]);
+        var sut = new ListZipper<int>(1, 2, 3, 4);
 
         var actual = sut.GoForward()?.GoForward()?.GoForward()?.GoBack();
 
@@ -57,7 +57,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoBack2()
     {
-        var sut = new ListZipper<int>([1, 2, 3, 4]);
+        var sut = new ListZipper<int>(1, 2, 3, 4);
 
         var actual = sut.GoForward()?.GoForward()?.GoBack();
 
@@ -68,7 +68,7 @@ public sealed class ListZipperTests
     [Fact]
     public void GoBackEmptyOnBreadcrumbs()
     {
-        var sut = new ListZipper<string>(["foo", "bar", "baz"]);
+        var sut = new ListZipper<string>("foo", "bar", "baz");
         var actual = sut.GoBack();
         Assert.Null(actual);
     }
@@ -92,7 +92,7 @@ public sealed class ListZipperTests
     [Fact]
     public void InsertAtFocus()
     {
-        var sut = new ListZipper<string>(["foo", "bar"]);
+        var sut = new ListZipper<string>("foo", "bar");
 
         var actual = sut.GoForward()?.Insert("ploeh").GoBack();
 
@@ -104,7 +104,7 @@ public sealed class ListZipperTests
     [Fact]
     public void RemoveAtFocus()
     {
-        var sut = new ListZipper<string>(["foo", "bar", "baz"]);
+        var sut = new ListZipper<string>("foo", "bar", "baz");
 
         var actual = sut.GoForward()?.Remove()?.GoBack();
 
@@ -116,7 +116,7 @@ public sealed class ListZipperTests
     [Fact]
     public void RemoveWhenEmpty()
     {
-        var sut = new ListZipper<string>([]);
+        var sut = new ListZipper<string>();
         var actual = sut.Remove();
         Assert.Null(actual);
     }
@@ -124,7 +124,7 @@ public sealed class ListZipperTests
     [Fact]
     public void ReplaceAtFocus()
     {
-        var sut = new ListZipper<string>(["foo", "bar", "baz"]);
+        var sut = new ListZipper<string>("foo", "bar", "baz");
 
         var actual = sut.GoForward()?.Replace("qux")?.GoBack();
 
@@ -136,7 +136,7 @@ public sealed class ListZipperTests
     [Fact]
     public void ReplaceWhenEmpty()
     {
-        var sut = new ListZipper<string>([]);
+        var sut = new ListZipper<string>();
         var actual = sut.Replace("qux");
         Assert.Null(actual);
     }

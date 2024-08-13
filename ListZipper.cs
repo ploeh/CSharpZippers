@@ -17,6 +17,10 @@ public sealed class ListZipper<T> : IEnumerable<T>
     {
     }
 
+    public ListZipper(params T[] values) : this(values.AsEnumerable())
+    {
+    }
+
     public ListZipper<T>? GoForward()
     {
         var head = values.Take(1);
