@@ -32,16 +32,14 @@ public sealed class FSItem
         Func<string, string, TResult> whenFile,
         Func<string, IReadOnlyCollection<FSItem>, TResult> whenFolder)
     {
-        return imp
-            .Aggregate(
-                whenFile: (name, data) =>
-                    (item: CreateFile(name, data), result: whenFile(name, data)),
-                whenFolder: (name, pairs) =>
-                {
-                    var items = pairs.Select(i => i.item).ToList();
-                    return (CreateFolder(name, items), whenFolder(name, items));
-                })
-            .result;
+        return Aggregate(
+            whenFile: (name, data) =>
+                (item: CreateFile(name, data), result: whenFile(name, data)),
+            whenFolder: (name, pairs) =>
+            {
+                var items = pairs.Select(i => i.item).ToList();
+                return (CreateFolder(name, items), whenFolder(name, items));
+            }).result;
     }
 
     public bool IsNamed(string name)
