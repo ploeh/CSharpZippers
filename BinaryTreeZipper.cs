@@ -5,12 +5,16 @@ public sealed class BinaryTreeZipper<T>
     public BinaryTree<T> Tree { get; }
     public IEnumerable<Crumb<T>> Breadcrumbs { get; }
 
-    public BinaryTreeZipper(
+    private BinaryTreeZipper(
         BinaryTree<T> tree,
         IEnumerable<Crumb<T>> breadcrumbs)
     {
         Tree = tree;
         Breadcrumbs = breadcrumbs;
+    }
+
+    public BinaryTreeZipper(BinaryTree<T> tree) : this(tree, [])
+    {
     }
 
     public BinaryTreeZipper<T>? GoLeft()
